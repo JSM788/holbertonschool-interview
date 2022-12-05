@@ -1,4 +1,12 @@
+#!/usr/bin/python3
+"""
+function def pascal_triangle(n):
+"""
+
 def pascal_triangle(n):
+    """
+    returns a list of lists of integers
+    """
     fila = [1]
     cero = [0]
     array = []
