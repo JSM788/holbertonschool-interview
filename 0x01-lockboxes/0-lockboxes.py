@@ -10,7 +10,8 @@ def canUnlockAll(boxes):
     for key in keys:
         for box in boxes[key]:
             if box not in keys:
-                keys.append(box)
+                if box < size:
+                    keys.append(box)
     if size == len(keys):
         return True
     return False
