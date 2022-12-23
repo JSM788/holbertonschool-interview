@@ -6,22 +6,28 @@ status_codes = {}
 total_size = 0
 count = 0
 
-for line in sys.stdin:
-    words = line.split(" ")
-    if len(words) != 9:
-        continue
+try:
+    for line in sys.stdin:
+        words = line.split(" ")
+        if len(words) != 9:
+            continue
 
-    count += 1
-    total_size += int(words[8])
+        count += 1
+        total_size += int(words[8])
 
-    status_code = words[7]
-    if status_code in status_codes:
-        status_codes[status_code] += 1
-    else:
-        status_codes[status_code] = 1
+        status_code = words[7]
+        if status_code in status_codes:
+            status_codes[status_code] += 1
+        else:
+            status_codes[status_code] = 1
 
-    if count % 10 == 0:
-        print("File size: {}".format(total_size))
-        for status_code, count in sorted(status_codes.items()):
-            print("{}: {}".format(status_code, count))
-        status_codes = {}
+        if count % 10 == 0:
+            print("File size: {}".format(total_size))
+            for status_code, count in sorted(status_codes.items()):
+                print("{}: {}".format(status_code, count))
+
+except KeyboardInterrupt:
+    print("File size: {}".format(total_size))
+    for status_code, count in sorted(status_codes.items()):
+        print("{}: {}".format(status_code, count))
+
