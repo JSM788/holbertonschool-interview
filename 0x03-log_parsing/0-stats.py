@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """This script reads stdin line by line computes metrics"""
 import sys
 
