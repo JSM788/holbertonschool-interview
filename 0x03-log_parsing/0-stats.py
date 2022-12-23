@@ -2,32 +2,33 @@
 """This script reads stdin line by line computes metrics"""
 import sys
 
-status_codes = {}
-total_size = 0
-count = 0
+if __name__ == "__main__":
 
-try:
-    for line in sys.stdin:
-        words = line.split(" ")
-        if len(words) != 9:
-            continue
+    status_codes = {}
+    total_size = 0
+    count = 0
 
-        count += 1
-        total_size += int(words[8])
+    try:
+        for line in sys.stdin:
+            words = line.split(" ")
+            if len(words) != 9:
+                continue
 
-        status_code = words[7]
-        if status_code in status_codes:
-            status_codes[status_code] += 1
-        else:
-            status_codes[status_code] = 1
+            count += 1
+            total_size += int(words[8])
 
-        if count % 10 == 0:
-            print("File size: {}".format(total_size))
-            for status_code, count in sorted(status_codes.items()):
-                print("{}: {}".format(status_code, count))
+            status_code = words[7]
+            if status_code in status_codes:
+                status_codes[status_code] += 1
+            else:
+                status_codes[status_code] = 1
 
-except KeyboardInterrupt:
-    print("File size: {}".format(total_size))
-    for status_code, count in sorted(status_codes.items()):
-        print("{}: {}".format(status_code, count))
+            if count % 10 == 0:
+                print("File size: {}".format(total_size))
+                for status_code, count in sorted(status_codes.items()):
+                    print("{}: {}".format(status_code, count))
 
+    except KeyboardInterrupt:
+        print("File size: {}".format(total_size))
+        for status_code, count in sorted(status_codes.items()):
+            print("{}: {}".format(status_code, count))
