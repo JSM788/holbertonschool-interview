@@ -2,8 +2,8 @@
 """This script reads stdin line by line computes metrics"""
 import sys
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     status_codes = {}
     total_size = 0
     count = 0
