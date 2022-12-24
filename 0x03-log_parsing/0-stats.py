@@ -12,20 +12,18 @@ if __name__ == "__main__":
         """This method prints the state and its matches"""
         print("File size: {}".format(total_size))
         for status_code, matches in sorted(status_codes.items()):
-            if status_codes[status_code] != 0:
-                print("{}: {}".format(status_code, matches))
+            print("{}: {}".format(status_code, matches))
 
     try:
         for line in sys.stdin:
             try:
-                line = line[:-1]
-                words = line.split(' ')
+                words = line.split()
                 total_size += int(words[-1])
                 status_code = int(words[-2])
 
                 if status_code in status_codes:
                     status_codes[status_code] += 1
-                elif status_code not in status_codes:
+                else:
                     status_codes[status_code] = 1
             except Exception:
                 pass
