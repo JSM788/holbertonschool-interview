@@ -15,24 +15,21 @@ if __name__ == "__main__":
             if status_codes[status_code] != 0:
                 print("{}: {}".format(status_code, matches))
 
-    def validation(line):
-        """This method validate if the line has a correct format"""
-        try:
-            line = line[:-1]
-            words = line.split()
-            status_code = int(words[-2])
-
-            if status_code in status_codes:
-                status_codes[status_code] += 1
-            elif status_code not in status_codes:
-                status_codes[status_code] = 1
-            return int(words[-1])
-        except Exception:
-            pass
-
     try:
         for line in sys.stdin:
-            total_size += validation(line)
+            try:
+                line = line[:-1]
+                words = line.split(' ')
+                total_size += int(words[-1])
+                status_code = int(words[-2])
+
+                if status_code in status_codes:
+                    status_codes[status_code] += 1
+                elif status_code not in status_codes:
+                    status_codes[status_code] = 1
+            except Exception:
+                pass
+
             if count % 10 == 0:
                 print_lines()
             count += 1
