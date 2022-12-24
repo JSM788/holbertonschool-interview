@@ -12,7 +12,8 @@ if __name__ == "__main__":
         """This method prints the state and its matches"""
         print("File size: {}".format(total_size))
         for status_code, matches in sorted(status_codes.items()):
-            print("{}: {}".format(status_code, matches))
+            if status_codes[status_code] != 0:
+                print("{}: {}".format(status_code, matches))
 
     def validation(line):
         """This method validate if the line has a correct format"""
