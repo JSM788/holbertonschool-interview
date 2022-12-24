@@ -6,30 +6,35 @@ import sys
 if __name__ == "__main__":
     status_codes = {}
     total_size = 0
-    count = 0
+    count = 1
 
-    try:
-        for line in sys.stdin:
-            words = line.split()
-            if len(words) != 9:
-                continue
-
-            count += 1
-            total_size += int(words[8])
-
-            status_code = words[7]
-            if status_code in status_codes:
-                status_codes[status_code] += 1
-            else:
-                status_codes[status_code] = 1
-
-            if count % 10 == 0:
-                print("File size: {}".format(total_size))
-                for status_code, matches in sorted(status_codes.items()):
-                    print("{}: {}".format(status_code, matches))
-
-    except KeyboardInterrupt:
+    def print_lines():
+        """This method prints the state and its matches"""
         print("File size: {}".format(total_size))
         for status_code, matches in sorted(status_codes.items()):
             print("{}: {}".format(status_code, matches))
+
+    def validation(line):
+        """This method validate if the line has a correct format"""
+        try:
+            words = line.split()
+            status_code = int(words[7])
+
+            if status_code in status_codes:
+                status_codes[status_code] += 1
+            elif status_code not in status_codes:
+                status_codes[status_code] = 1
+            return int(words[8])
+        except Exception:
+            return 0
+
+    try:
+        for line in sys.stdin:
+            total_size += validation(line)
+            if count % 10 == 0:
+                print_lines()
+            count += 1
+    except KeyboardInterrupt:
+        print_lines()
         raise
+    print_lines()
