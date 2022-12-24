@@ -17,6 +17,7 @@ if __name__ == "__main__":
     def validation(line):
         """This method validate if the line has a correct format"""
         try:
+            line = line[:-1]
             words = line.split()
             status_code = int(words[-2])
 
