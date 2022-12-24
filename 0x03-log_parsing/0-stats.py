@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     try:
         for line in sys.stdin:
-            words = line.split(" ")
+            words = line.split()
             if len(words) != 9:
                 continue
 
@@ -25,10 +25,11 @@ if __name__ == "__main__":
 
             if count % 10 == 0:
                 print("File size: {}".format(total_size))
-                for status_code, count in sorted(status_codes.items()):
-                    print("{}: {}".format(status_code, count))
+                for status_code, matches in sorted(status_codes.items()):
+                    print("{}: {}".format(status_code, matches))
 
     except KeyboardInterrupt:
         print("File size: {}".format(total_size))
-        for status_code, count in sorted(status_codes.items()):
-            print("{}: {}".format(status_code, count))
+        for status_code, matches in sorted(status_codes.items()):
+            print("{}: {}".format(status_code, matches))
+        raise
