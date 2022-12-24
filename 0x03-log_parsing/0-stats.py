@@ -27,7 +27,7 @@ if __name__ == "__main__":
                 status_codes[status_code] = 1
             return int(words[-1])
         except Exception:
-            return 0
+            pass
 
     try:
         for line in sys.stdin:
