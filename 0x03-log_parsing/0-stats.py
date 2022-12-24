@@ -18,13 +18,13 @@ if __name__ == "__main__":
         """This method validate if the line has a correct format"""
         try:
             words = line.split()
-            status_code = int(words[7])
+            status_code = int(words[-2])
 
             if status_code in status_codes:
                 status_codes[status_code] += 1
             elif status_code not in status_codes:
                 status_codes[status_code] = 1
-            return int(words[8])
+            return int(words[-1])
         except Exception:
             return 0
 
